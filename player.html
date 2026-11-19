@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light">
 <style>
-:root{color-scheme:dark}
-html,body{margin:0;height:100%;background:#13151b;overflow:hidden}
-#b{position:relative;width:100%;height:100%;box-sizing:border-box;background:#13151b;border:1px solid #2e323d;overflow:hidden;cursor:pointer;color:#e8ecf7}
-#t{position:absolute;inset:0;background:center/cover no-repeat;filter:grayscale(1);opacity:.35;transform:scale(1.25)}
+:root{color-scheme:light}
+html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+#b{position:relative;width:100%;height:100%;cursor:pointer;overflow:hidden}
+#t{display:none;position:absolute;inset:0;background:center/cover no-repeat;filter:grayscale(1);opacity:.5;transform:scale(1.25)}
+.show #t{display:block}
 #c{position:absolute;left:50%;top:50%;width:320px;height:180px;margin:0;opacity:.01;pointer-events:none;transform:translate(-50%,-50%) scale(.25);transform-origin:center}
 #c iframe{width:320px;height:180px;border:0;display:block}
-#i{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.9;font:700 15px Georgia,serif;pointer-events:none}
-#i svg{width:14px;height:14px;fill:currentColor;filter:drop-shadow(0 0 2px #000)}
+#i{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font:700 15px Georgia,serif;pointer-events:none}
+.show #i{filter:drop-shadow(0 0 2px rgba(0,0,0,.85))}
+#i svg{width:14px;height:14px;fill:currentColor}
 #pa,#er{display:none}
 </style></head><body>
 <div id="b"><div id="t"></div><div id="c"><div id="yt"></div></div><div id="i">
@@ -19,7 +21,10 @@ html,body{margin:0;height:100%;background:#13151b;overflow:hidden}
 </div></div>
 <script>
 var q=new URLSearchParams(location.search), vid=q.get('v'), showVideo=q.get('show')==='1', player, ready=false;
-document.getElementById('t').style.backgroundImage='url(https://i.ytimg.com/vi/'+vid+'/mqdefault.jpg)';
+if(showVideo){
+  document.body.className='show';
+  document.getElementById('t').style.backgroundImage='url(https://i.ytimg.com/vi/'+vid+'/mqdefault.jpg)';
+}
 function icon(on){
   document.getElementById('pl').style.display=on?'none':'block';
   document.getElementById('pa').style.display=on?'block':'none';
@@ -27,7 +32,7 @@ function icon(on){
 function seeVideo(on){
   if(!showVideo)return;
   document.getElementById('c').style.opacity=on?'1':'.01';
-  document.getElementById('t').style.opacity=on?'0':'.35';
+  document.getElementById('t').style.opacity=on?'0':'.5';
 }
 function fail(code){
   document.getElementById('pl').style.display='none';
