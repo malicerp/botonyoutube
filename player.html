@@ -24,7 +24,7 @@ function show(on){
 }
 function onYouTubeIframeAPIReady(){
   pl=new YT.Player('p',{width:200,height:200,videoId:id,
-    playerVars:{controls:0,playsinline:1},
+    playerVars:{controls:0,playsinline:1,rel:0},
     events:{onStateChange:function(e){show(e.data===1);}}});
 }
 document.getElementById('b').onclick=function(){
